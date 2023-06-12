@@ -1,6 +1,4 @@
-import PocketBase from 'pocketbase'
-export const pb = new PocketBase('http://127.0.0.1:8090')
-
+import { pb } from '@/lib/db'
 
 /**
  * Retrieve specific field from Character.
@@ -8,7 +6,7 @@ export const pb = new PocketBase('http://127.0.0.1:8090')
  * @param fieldName 
  * @returns 
  */
-export async function getCharacterField(character: any, fieldName: string) {
+export async function getCharacterField(character: Character, fieldName: string) {
   return character.fields?.find((el: { type: string; id: string }) => `${el.type}.${el.id}` === fieldName)
 }
 
@@ -34,7 +32,6 @@ export async function saveFieldValue(fieldId: string, value: any, characterId: s
 
   console.log("Value: ", value)
   console.log("Field is being saved: ", fieldId)
-  // return pb.collection('character_fields').
 }
 
 

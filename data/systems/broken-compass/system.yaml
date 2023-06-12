@@ -1,0 +1,231 @@
+name: broken-compass
+called: Broken Compass
+compendium:
+  fields:
+    -
+      type: feel
+      name: powerful
+      data:
+        type: plus
+    -
+      type: feel
+      name: powerful
+      data:
+        type: plus
+    -
+      type: feel
+      name: powerful
+      data:
+        type: plus
+    -
+      type: feel
+      name: powerful
+      data:
+        type: plus
+    -
+      type: feel
+      name: powerful
+      data:
+        type: plus
+    -
+      type: feel
+      name: powerful
+      data:
+        type: plus
+    -
+      type: feel
+      name: powerful
+      data:
+        type: minus
+    -
+      type: feel
+      name: powerful
+      data:
+        type: minus
+    -
+      type: feel
+      name: powerful
+      data:
+        type: minus
+    -
+      type: feel
+      name: powerful
+      data:
+        type: minus
+    -
+      type: feel
+      name: powerful
+      data:
+        type: minus
+    -
+      type: feel
+      name: powerful
+      data:
+        type: minus
+    
+character:
+  fields:
+    -
+      type: text
+      name: name
+    -
+      type: text
+      name: words-to-live-by
+    -
+      type: text
+      name: workplace
+    -
+      type: text
+      name: homeland
+    -
+      type: text
+      name: heritage
+    -
+      type: text
+      name: luck
+      value: 10
+    -
+      type: text
+      name: luck-coin
+      value: 1
+    
+    # BC Fields
+    -
+      type: skill
+      name: action
+      value: 2
+    -
+      type: skill
+      name: guts
+      value: 2
+    -
+      type: skill
+      name: knowledge
+      value: 2
+    -
+      type: skill
+      name: society
+      value: 2
+    -
+      type: skill
+      name: wild
+      value: 2
+    -
+      type: skill
+      name: crime
+      value: 2
+
+    # BC: Skills
+    -
+      type: skill
+      name: fight
+      value: 1
+      data:
+        parent: action
+    -
+      type: skill
+      name: leadership
+      value: 1
+      data:
+        parent: action
+    -
+      type: skill
+      name: stunt
+      value: 1
+      data:
+        parent: action
+    -
+      type: skill
+      name: cool
+      value: 1
+      data:
+        parent: guts
+    -
+      type: skill
+      name: drive
+      value: 1
+      data:
+        parent: guts
+    -
+      type: skill
+      name: shoot
+      value: 1
+      data:
+        parent: guts
+    -
+      type: skill
+      name: culture
+      value: 1
+      data:
+        parent: knowledge
+    -
+      type: skill
+      name: first-aid
+      value: 1
+      data:
+        parent: knowledge
+    -
+      type: skill
+      name: tech
+      value: 1
+      data:
+        parent: knowledge
+    -
+      type: skill
+      name: charm
+      value: 1
+      data:
+        parent: society
+    -
+      type: skill
+      name: eloquence
+      value: 1
+      data:
+        parent: society
+    -
+      type: skill
+      name: observation
+      value: 1
+      data:
+        parent: society
+    -
+      type: skill
+      name: scout
+      value: 1
+      data:
+        parent: wild
+    -
+      type: skill
+      name: survival
+      value: 1
+      data:
+        parent: wild
+    -
+      type: skill
+      name: tough
+      value: 1
+      data:
+        parent: wild
+    -
+      type: skill
+      name: alert
+      value: 1
+      data:
+        parent: crime
+    -
+      type: skill
+      name: dexterity
+      value: 1
+      data:
+        parent: crime
+    -
+      type: skill
+      name: stealth
+      value: 1
+      data:
+        parent: crime
+
+
+
+
+

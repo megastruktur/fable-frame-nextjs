@@ -1,7 +1,8 @@
 import ClickInput from "../components/ClickInput"
-import { getAllCharacters, getEmptyCharacterField, loadCharacterFieldsByType, getFieldByNameFromList } from "@/lib/utils"
+import { getAllCharacters, loadCharacterFieldsByType, getFieldByNameFromList } from "@/lib/utils"
 import RadioIncrementalSelect from "../components/RadioIncrementalSelect"
 import { ListResult } from "pocketbase"
+import { migrateCharacter } from "@/lib/character"
 
 type Params = {
   params: {
@@ -22,8 +23,9 @@ export default async function CharacterPage({params: {characterId}}: Params) {
 
   const skillsData : Promise<ListResult<CharacterField>> = loadCharacterFieldsByType(characterId, 'skill')
 
-
   const [skills, textFields] = await Promise.all([skillsData, textFieldsData])
+
+  // migrateCharacter(characterId) // load data from System
   
   async function CharacterDetailsSection() {
 
@@ -80,29 +82,106 @@ export default async function CharacterPage({params: {characterId}}: Params) {
     return content
   }
 
+  function CharacterSkill({ skill } : {skill: CharacterField}) {
+
+    return (
+      <label htmlFor={`${skill.id}-0`} className={"block"}>
+        <h4 className="inline-block">{skill.name}</h4>
+
+        <RadioIncrementalSelect
+          fieldId={skill.id} characterId={skill.characterId}
+          fieldType={skill.type} fieldValue={skill.value}
+          fieldName={skill.name} valuesAmount={3}  />
+      </label>
+    )
+
+  }
+
   // @todo: Pass params to component. How?
   // @todo Make sure to Async with Syspense? We have SSG but for a new Character I have to speed up the loading.
-  async function CharacterSkillsSection() {
+  function CharacterSkillsSection() {
+
+    const fieldAction = getFieldByNameFromList(skills.items,'action')
+    const fieldGuts = getFieldByNameFromList(skills.items,'guts')
+    const fieldKnowledge = getFieldByNameFromList(skills.items,'knowledge')
+    const fieldSociety = getFieldByNameFromList(skills.items,'society')
+    const fieldWild = getFieldByNameFromList(skills.items,'wild')
+    const fieldCrime = getFieldByNameFromList(skills.items,'crime')
+
+    const skillFight = getFieldByNameFromList(skills.items,'fight')
+    const skillLeadership = getFieldByNameFromList(skills.items,'leadership')
+    const skillStunt = getFieldByNameFromList(skills.items,'stunt')
+    const skillCool = getFieldByNameFromList(skills.items,'cool')
+    const skillDrive = getFieldByNameFromList(skills.items,'drive')
+    const skillShoot = getFieldByNameFromList(skills.items,'shoot')
+    const skillCulture = getFieldByNameFromList(skills.items,'culture')
+    const skillFirstAid = getFieldByNameFromList(skills.items,'first-aid')
+    const skillTech = getFieldByNameFromList(skills.items,'tech')
+    const skillCharm = getFieldByNameFromList(skills.items,'charm')
+    const skillEloquence = getFieldByNameFromList(skills.items,'eloquence')
+    const skillObservation = getFieldByNameFromList(skills.items,'observation')
+    const skillScout = getFieldByNameFromList(skills.items,'scout')
+    const skillSurvival = getFieldByNameFromList(skills.items,'survival')
+    const skillTough = getFieldByNameFromList(skills.items,'tough')
+    const skillAlert = getFieldByNameFromList(skills.items,'alert')
+    const skillDexterity = getFieldByNameFromList(skills.items,'dexterity')
+    const skillStealth = getFieldByNameFromList(skills.items,'stealth')
+
 
     const content = (
       <section>
         <div>
+          <CharacterSkill skill={fieldAction} />
           <div>
-
-            {skills.items.map(skill => (
-              <div key={`${skill.id}-block`}>
-              <label
-                htmlFor={`${skill.id}-0`}
-              ><h4 className="text-xl">{skill.name}</h4></label>
-              <RadioIncrementalSelect
-                key={skill.id}
-                fieldId={skill.id} characterId={skill.characterId}
-                fieldType={skill.type} fieldValue={skill.value}
-                fieldName={skill.name} valuesAmount={3}  />
-              </div>
-            ))}
+            <CharacterSkill skill={skillFight} />
+            <CharacterSkill skill={skillLeadership} />
+            <CharacterSkill skill={skillStunt} />
           </div>
-          
+        </div>
+        <hr />
+        <div>
+          <CharacterSkill skill={fieldGuts} />
+          <div>
+            <CharacterSkill skill={skillCool} />
+            <CharacterSkill skill={skillDrive} />
+            <CharacterSkill skill={skillShoot} />
+          </div>
+        </div>
+        <hr />
+        <div>
+          <CharacterSkill skill={fieldKnowledge} />
+          <div>
+            <CharacterSkill skill={skillCulture} />
+            <CharacterSkill skill={skillFirstAid} />
+            <CharacterSkill skill={skillTech} />
+          </div>
+        </div>
+        <hr />
+        <div>
+          <CharacterSkill skill={fieldSociety} />
+          <div>
+            <CharacterSkill skill={skillCharm} />
+            <CharacterSkill skill={skillEloquence} />
+            <CharacterSkill skill={skillObservation} />
+          </div>
+        </div>
+        <hr />
+        <div>
+          <CharacterSkill skill={fieldWild} />
+          <div>
+            <CharacterSkill skill={skillScout} />
+            <CharacterSkill skill={skillSurvival} />
+            <CharacterSkill skill={skillTough} />
+          </div>
+        </div>
+        <hr />
+        <div>
+          <CharacterSkill skill={fieldCrime} />
+          <div>
+            <CharacterSkill skill={skillAlert} />
+            <CharacterSkill skill={skillDexterity} />
+            <CharacterSkill skill={skillStealth} />
+          </div>
         </div>
       </section>
     )

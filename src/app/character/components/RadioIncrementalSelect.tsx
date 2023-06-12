@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { saveFieldValue } from '@/lib/utils'
+import { BsChevronUp } from'react-icons/bs'
 
 type Props = {
   fieldId: string
@@ -44,19 +45,22 @@ export default function RadioIncrementalSelect({ fieldId, characterId, fieldType
 
         {numbers.map(number =>
           <span key={`${fieldId}-${number}`}>
-            <input
-              className="hidden"
-              type="radio"
-              id={`${fieldId}-${number}`}
-              name={fieldInputName}
-              value={number}
-              onChange={changeHandler}
-              checked={(Number(value) === number) ? true : false}
-              />
             <label
-              className={`cursor-pointer font-bold text-3xl m-4 text-red-500 ${number <= Number(value)? 'text-red-500' : 'text-white'}`}
+              className={`cursor-pointer font-bold text-3xl text-red-500 ${number <= Number(value)? 'text-red-500' : 'text-white'}`}
               htmlFor={`${fieldId}-${number}`}
-              >{number}</label>
+              >
+
+              <input
+                className="hidden"
+                type="radio"
+                id={`${fieldId}-${number}`}
+                name={fieldInputName}
+                value={number}
+                onChange={changeHandler}
+                checked={(Number(value) === number) ? true : false}
+                />
+              <BsChevronUp className='inline-block' />
+            </label>
           </span>
         )}
     </>

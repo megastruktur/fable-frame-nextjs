@@ -4,16 +4,27 @@ type CharacterField = {
   name: string
   characterId: string
   value: string
+  data?: string
 }
 
 type Character = {
   id: string
   name: string
-  systemId: string
-  fields?: Array<CharacterField>
+  systemId: string // load systemId from rpg_systems
+  fields: CharacterField[]
 }
 
-type RPGSystem = {
-  id: string
+type CharacterSystemData = {
+  fields: CharacterField[]
+}
+
+type CompendiumSystemData = {
+  fields: CharacterField[]
+}
+
+type TTRPGSystem = {
   name: string
+  called: string
+  compendium: CompendiumSystemData
+  character: CharacterSystemData
 }
