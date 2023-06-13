@@ -9,7 +9,6 @@ type CharacterField = {
 
 type Character = {
   id: string
-  name: string
   systemId: string // load systemId from rpg_systems
   fields: CharacterField[]
 }

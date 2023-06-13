@@ -17,7 +17,6 @@ export async function loadCharacter(characterId: string) {
 
   const character : Character = {
     id: characterId,
-    name: getFieldByNameFromList(loadedFields, 'name').value,
     systemId: characterLoaded.systemId,
     fields: loadedFields
   }
