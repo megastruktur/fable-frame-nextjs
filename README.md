@@ -13,3 +13,9 @@ A WIP project to create an application to store Character Sheets from different 
 
 # Starting point
 - Broken Compass TTRPG
+
+# Dev Notes
+- To access Pocketbase DB from local start it with `./pocketbase serve --http="MACHINELOCALIP:8090"` and then change the db.tsx to reflect the IP change.
+
+# Current Progress
+![](images/current-functionality.gif)
