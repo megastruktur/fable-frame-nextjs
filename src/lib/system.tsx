@@ -1,38 +1,37 @@
 import path from "path"
-import { promises as fs } from 'fs'
 import { pb } from '@/lib/db'
 
-/**
- * 
- * @param systemName 
- * @returns 
- */
-export async function loadSystemSettings(systemName: string) {
+// /**
+//  * 
+//  * @param systemName 
+//  * @returns 
+//  */
+// export async function loadSystemSettings(systemName: string) {
+
+//   const fs = require("fs")
+//   const yaml = require("js-yaml")
+//   const systemYamlPath = path.join(process.cwd(), "data", "systems", systemName, "system.yaml")
 
 
-  const yaml = require("js-yaml")
-  const systemYamlPath = path.join(process.cwd(), "data", "systems", systemName, "system.yaml")
+//   try {
+//       const systemYaml = await fs.readFile(systemYamlPath, "utf8")
+//       return yaml.load(systemYaml)
+//   }
+//   catch (err) {
+//       console.log(err)
+//   }
 
+//   return undefined
+// }
 
-  try {
-      const systemYaml = await fs.readFile(systemYamlPath, "utf8")
-      return yaml.load(systemYaml)
-  }
-  catch (err) {
-      console.log(err)
-  }
+// export async function getCharacterFieldsBlueprintBySystemId(systemId: string) {
 
-  return undefined
-}
+//   // Get the Name from DB.
+//   const ttrpgSystemDb: TTRPGSystem = await pb.collection('rpg_systems').getOne(systemId)
 
-export async function getCharacterFieldsBlueprintBySystemId(systemId: string) {
+//   // Load the System from file.
+//   const system: TTRPGSystem = await loadSystemSettings(ttrpgSystemDb.name)
 
-  // Get the Name from DB.
-  const ttrpgSystemDb: TTRPGSystem = await pb.collection('rpg_systems').getOne(systemId)
-
-  // Load the System from file.
-  const system: TTRPGSystem = await loadSystemSettings(ttrpgSystemDb.name)
-
-  return system.character.fields
-}
+//   return system.character.fields
+// }
 

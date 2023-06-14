@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 
-import { saveFieldValue } from "@/lib/utils"
+import { saveFieldValue } from "@/lib/character"
 
 type Props = {
   fieldId: string

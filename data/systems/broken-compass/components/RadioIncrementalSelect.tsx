@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { saveFieldValue } from '@/lib/utils'
+import { saveFieldValue } from '@/lib/character'
 import { TbDiamondFilled } from 'react-icons/tb'
 import { TbDiamond } from 'react-icons/tb'
 
