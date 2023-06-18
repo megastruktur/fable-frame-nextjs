@@ -1,4 +1,4 @@
-# WIP Character Arkana prototype
+# WIP Fable Frame prototype
 
 A WIP project to create an application to store Character Sheets from different TTRPGs in one place.
 - Mobile Layout
