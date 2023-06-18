@@ -1,8 +1,13 @@
 # Todo
 
+- @todo Create a file on build with the list of Systems to load dynamically (`system_loader.ts`)
+
+- Denormalize the Character when properties added to make calculations faster. Or maybe SSG is enough?
+
 - Get familiar with Pocketbase's DB layer and make sure autoCancellation works as intended
 
 > right now it cancels all "similar" request e.g. when adding a bunch of records. I'm not sure this is how it was designed.
+> for now I'm going to disable it for extensive calls.
 
 - OOP approach or code restructure
 

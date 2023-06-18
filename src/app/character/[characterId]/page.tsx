@@ -1,6 +1,8 @@
 import { loadCharacter } from "@/lib/character";
+import { loadSystem } from "@/lib/system";
 import { getAllCharacters } from "@/lib/utils"
-import dynamic from 'next/dynamic';
+import { Suspense } from "react";
+import { TTRPGSystems } from "@root/system_loader";
 
 type Params = {
   params: {
@@ -16,12 +18,16 @@ export const revalidate = 10
  * @returns 
  */
 export default async function CharacterPage({params: {characterId}}: Params) {
-  const Character = dynamic(() => import('@/../data/systems/broken-compass/components/character'))
 
   const character = await loadCharacter(characterId)
+  const TTRPGSystem: TTRPGSystem = await loadSystem(character.systemId)
 
+  // @ts-ignore
+  const Character = TTRPGSystems[TTRPGSystem.name]
   return (
-    <Character character={character} />
+    <Suspense fallback={<div>Loading character...</div>}>
+      <Character character={character} />
+    </Suspense>
   )
 }
 

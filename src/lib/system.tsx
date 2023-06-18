@@ -1,6 +1,17 @@
 import path from "path"
 import { pb } from '@/lib/db'
 
+/**
+ *
+ *
+ * @export
+ * @param {string} systemId
+ * @return {*}  {Promise<TTRPGSystem>}
+ */
+export async function loadSystem(systemId: string): Promise<TTRPGSystem> {
+  return pb.collection('rpg_systems').getOne(systemId)
+}
+
 // /**
 //  * 
 //  * @param systemName 
