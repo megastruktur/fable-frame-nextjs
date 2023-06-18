@@ -101,6 +101,33 @@ export async function loadCharacterFieldsByType(characterId: string, type: strin
   });
 }
 
+export type LoadedCharacter = {
+  characterId: string,
+  characterName: string,
+  systemName: string,
+}
+
+/**
+ * @todo Add Pagination.
+ * @returns 
+ */
+export async function loadAllCharactersWithSystemAndName(): Promise<LoadedCharacter[]> {
+  
+  const res = await pb.collection("character_fields").getList(1, 50, {
+    filter: `type = "text" && name = "name"`,
+    expand: "characterId.systemId",
+  })
+
+  return res.items.map((el) => {
+    return {
+      characterName: el.value,
+      characterId: el.characterId,
+      // @ts-ignore
+      systemName: el.expand.characterId.expand.systemId.name,
+    }
+  })
+}
+
 /**
  *
  *

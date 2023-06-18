@@ -12,7 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="dark: bg-slate-600">{children}</body>
+      <body className="bg-slate-600 flex min-h-screen flex-col items-center p-24 text-white">{children}</body>
     </html>
   )
 }

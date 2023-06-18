@@ -3,16 +3,16 @@ import { promises as fs } from 'fs'
 
 type Params = {
   params: {
-    systemName: string
+    systemId: string
   }
 }
 
 
-export default async function ImportSystemPage({ params: { systemName } }: Params) {
+export default async function ImportSystemPage({ params: { systemId } }: Params) {
 
   const yaml = require('js-yaml');
 
-  const systemPath = path.join(process.cwd(), 'data', 'systems', systemName)
+  const systemPath = path.join(process.cwd(), 'data', 'systems', systemId)
   
   // Read the system.yaml file from systemPath if it exists
   const systemYaml = await fs.readFile(path.join(systemPath,'system.yaml'), 'utf8')

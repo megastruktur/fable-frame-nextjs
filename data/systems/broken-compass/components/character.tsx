@@ -137,7 +137,7 @@ export default async function Character({ character }: Props) {
 
   // Main Character Page HTML
   return (
-    <main className="flex flex-row justify-around text-white bg-slate-600">
+    <main className="flex flex-row justify-around">
       
       {/* Skills */}
       <section className="flex border-slate-700 border-2 p-2 shadow-2xl rounded">
