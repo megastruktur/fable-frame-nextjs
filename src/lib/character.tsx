@@ -1,5 +1,6 @@
 import { getCharacterFieldsBlueprintBySystemName, listLoadedSystems } from '@/lib/system'
 import { pb } from '@/lib/db'
+import { revalidateCall } from './utils'
 
 
 /**
@@ -169,7 +170,6 @@ export async function createNewCharacter(systemName: string): Promise<string> {
   const record = await pb.collection('characters').create(characterCreationData);
 
 
-  pb.autoCancellation(false);
   // Create new fields in DB
   const insertPromises = systemCharacterFields.map(field => {
 
@@ -194,6 +194,17 @@ export async function createNewCharacter(systemName: string): Promise<string> {
   })
 
   return record.id
+}
+
+/**
+ * 
+ * @param characterId 
+ * @returns 
+ */
+export async function deleteCharacter(characterId: string) {
+  const character = pb.collection('characters').delete(characterId)
+  // revalidateCall("/characters")
+  return character
 }
 
 // /**

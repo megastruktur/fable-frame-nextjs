@@ -1,5 +1,5 @@
+import NavBar from '@/components/NavBar'
 import './globals.css'
-import Link from "next/link"
 
 export const metadata = {
   title: 'Create Next App',
@@ -14,15 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-
-        <nav>
-          <ul className="flex flex-col space-y-4 bg-slate-900 text-white">
-            <li>
-              <Link className={"p-2"} href="/characters">List Characters</Link>
-            </li>
-          </ul>
-        </nav>
-
+        <NavBar />
         <main className="bg-slate-600 flex min-h-screen flex-col items-center p-24 text-white">
           {children}
         </main>

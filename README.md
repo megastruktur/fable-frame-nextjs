@@ -21,3 +21,7 @@ A WIP project to create an application to store Character Sheets from different 
 
 # Current Progress
 ![](images/current-functionality.gif)
+
+![](images/list-characters.png)
+
+![](images/delete_character.png)

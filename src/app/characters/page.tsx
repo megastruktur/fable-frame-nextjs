@@ -5,7 +5,10 @@ import { GiCharacter } from "react-icons/gi";
 import { listLoadedSystems } from "@/lib/system"
 import CreateCharButton from "@/components/CreateCharButton";
 
-export const revalidate = 60
+// export const revalidate = 86400
+
+// Do not cahce the fetch requests including PB
+export const fetchCache = "default-no-store"
 
 export async function generateMetadata() {
   return {

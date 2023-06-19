@@ -2,7 +2,7 @@ import { promises as fs } from 'fs'
 import path from 'path'
 import Link from 'next/link'
 
-export const revalidate = 0
+// export const revalidate = 86400
 
 export default async function ListSystemsPage() {
 

@@ -50,7 +50,6 @@ export default async function loadSystemSettings(systemName: string) {
   const yaml = require("js-yaml")
 
   const system = await pb.collection("rpg_systems").getFirstListItem(`name="${systemName}"`)
-  console.log(system)
 
   if (!system) {
     return undefined
