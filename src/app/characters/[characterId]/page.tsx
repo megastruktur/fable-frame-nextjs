@@ -20,6 +20,7 @@ export const revalidate = 10
 export default async function CharacterPage({params: {characterId}}: Params) {
 
   const character = await loadCharacter(characterId)
+
   const TTRPGSystem: TTRPGSystem = await loadSystem(character.systemId)
 
   // @ts-ignore

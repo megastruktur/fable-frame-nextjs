@@ -2,6 +2,11 @@ import Link from "next/link"
 import { LoadedCharacter, loadAllCharactersWithSystemAndName } from "@/lib/character"
 import { GiCharacter } from "react-icons/gi";
 
+import { listLoadedSystems } from "@/lib/system"
+import CreateCharButton from "@/components/CreateCharButton";
+
+export const revalidate = 60
+
 export async function generateMetadata() {
   return {
     title: "All characters",
@@ -11,12 +16,18 @@ export async function generateMetadata() {
 
 export default async function CharactersPage() {
 
-  const chars: LoadedCharacter[] = await loadAllCharactersWithSystemAndName()
+
+  const [chars, enabledSystems] = await Promise.all([loadAllCharactersWithSystemAndName(), listLoadedSystems()])
   
   // Sort by system.
   let charsBySystem: any = {}
+
+  // Create a list of all used RPG systems. Assign characters later.
+  enabledSystems.map(system => {
+    charsBySystem[system.systemName] = []
+  })
+
   chars.map(char => {
-    if (!charsBySystem[char.systemName]) charsBySystem[char.systemName] = []
     charsBySystem[char.systemName] = [...charsBySystem[char.systemName], char]
   })
 
@@ -34,9 +45,7 @@ export default async function CharactersPage() {
                     {char.characterName}
                 </Link>
               ))}
-
-              <Link className="bg-slate-800 flex grow drop-shadow-lg shadow-2xl p-2 hover:text-gray-400 justify-center m-2"
-                  href={`/${systemName}/new`}>New Character</Link>
+              <CreateCharButton systemName={systemName} />
             </div>
           </div>
         )
@@ -54,8 +63,9 @@ export default async function CharactersPage() {
             <GiCharacter />
         </div>
       </div>
-
-      {contentBySystem}
+      <div className="flex-row">
+        {contentBySystem}
+      </div>
     </>
   )
 }

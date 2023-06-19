@@ -1,4 +1,4 @@
-// import { getCharacterFieldsBlueprintBySystemId } from '@/lib/system'
+import { getCharacterFieldsBlueprintBySystemName, listLoadedSystems } from '@/lib/system'
 import { pb } from '@/lib/db'
 
 
@@ -9,10 +9,13 @@ import { pb } from '@/lib/db'
  */
 export async function loadCharacter(characterId: string): Promise<Character> {
 
-  const characterLoaded: Character= await pb.collection('characters').getOne(characterId)
-  
-  // Get the character from DB
-  const loadedFields: CharacterField[] = await pb.collection('character_fields').getFullList<CharacterField>()
+  const characterLoadedQ: Promise<Character>= pb.collection('characters').getOne(characterId)
+
+  const fieldsQ: Promise<CharacterField[]> = pb.collection('character_fields').getFullList<CharacterField>({
+    filter: `characterId="${characterId}"`
+  })
+
+  const [characterLoaded, loadedFields]: [Character, CharacterField[]] = await Promise.all([characterLoadedQ, fieldsQ])
 
   const character : Character = {
     id: characterId,
@@ -62,7 +65,6 @@ export function getEmptyCharacterField(): CharacterField {
  * @param fieldName 
  */
 export function getFieldByNameFromList(fieldList: CharacterField[], fieldName: string):CharacterField {
-  console.log(fieldName)
   let field = fieldList.find(field => field.name === fieldName)
 
   return field ? field : getEmptyCharacterField()
@@ -94,12 +96,12 @@ export async function getCharacterField(character: Character, fieldName: string)
 }
 
 
-export async function loadCharacterFieldsByType(characterId: string, type: string) {
-  return pb.collection('character_fields').getList<CharacterField>(1, 50, {
-    filter: `characterId = "${characterId}" && type = "${type}"`,
-    '$cancelKey': `field-${type}-${characterId}`
-  });
-}
+// export async function loadCharacterFieldsByType(characterId: string, type: string) {
+//   return pb.collection('character_fields').getFullList<CharacterField>({
+//     filter: `characterId = "${characterId}" && type = "${type}"`,
+//     '$cancelKey': `field-${type}-${characterId}`
+//   });
+// }
 
 export type LoadedCharacter = {
   characterId: string,
@@ -113,12 +115,12 @@ export type LoadedCharacter = {
  */
 export async function loadAllCharactersWithSystemAndName(): Promise<LoadedCharacter[]> {
   
-  const res = await pb.collection("character_fields").getList(1, 50, {
+  const res = await pb.collection("character_fields").getFullList({
     filter: `type = "text" && name = "name"`,
     expand: "characterId.systemId",
   })
 
-  return res.items.map((el) => {
+  return res.map((el) => {
     return {
       characterName: el.value,
       characterId: el.characterId,
@@ -138,6 +140,60 @@ export async function loadAllCharactersWithSystemAndName(): Promise<LoadedCharac
  */
 export function getCharacterFieldsByType(character: Character, type: string) {
   return character.fields.filter((el: CharacterField) => el.type === type)
+}
+
+/**
+ * Create a character and return the ID.
+ * @param systemName 
+ * @returns string CharacterId
+ */
+export async function createNewCharacter(systemName: string): Promise<string> {
+
+  // Get the system fields from system config.
+  const systemCharacterFieldsQ = getCharacterFieldsBlueprintBySystemName(systemName)
+  // Create new Character
+
+  const [systemCharacterFields, loadedSystems] = await Promise.all([systemCharacterFieldsQ, listLoadedSystems()])
+
+  const characterSystem = loadedSystems.find((el: any) => el.systemName === systemName)
+
+  // If system not found - throw Exception.
+  if (!characterSystem) {
+    throw new Error(`System ${systemName} not found`)
+  }
+
+  const characterCreationData = {
+      "systemId": characterSystem.systemId
+  };
+
+  const record = await pb.collection('characters').create(characterCreationData);
+
+
+  pb.autoCancellation(false);
+  // Create new fields in DB
+  const insertPromises = systemCharacterFields.map(field => {
+
+    const fieldData = {
+      type: field.type,
+      name: field.name,
+      value: field.value,
+      data: field.data,
+      characterId: record.id
+    }
+
+    // @todo if name - insert some default name.
+    if (field.name === 'name') {
+      fieldData.value = "New Character"
+    }
+
+    return pb.collection('character_fields').create(fieldData)
+  })
+
+  Promise.all(insertPromises).then(() => {
+    pb.autoCancellation(true);
+  })
+
+  return record.id
 }
 
 // /**

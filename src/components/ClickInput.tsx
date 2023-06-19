@@ -63,7 +63,7 @@ export default function ClickInput({ fieldId, characterId, fieldType, fieldValue
   }
 
   const element = !edit? (
-    <span onClick={clickEdit} className="text-green-300 cursor-pointer">{value}</span>
+    <span onClick={clickEdit} className="text-green-300 cursor-pointer">{value ? value : "click to edit"}</span>
   ) : (
     <EditableInput value={value} />
   )
