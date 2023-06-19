@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { LoadedCharacter, loadAllCharactersWithSystemAndName } from "@/lib/character"
+import { GiCharacter } from "react-icons/gi";
 
 export async function generateMetadata() {
   return {
@@ -11,33 +12,50 @@ export async function generateMetadata() {
 export default async function CharactersPage() {
 
   const chars: LoadedCharacter[] = await loadAllCharactersWithSystemAndName()
+  
+  // Sort by system.
+  let charsBySystem: any = {}
+  chars.map(char => {
+    if (!charsBySystem[char.systemName]) charsBySystem[char.systemName] = []
+    charsBySystem[char.systemName] = [...charsBySystem[char.systemName], char]
+  })
 
-  const content = (
+  const contentBySystem = (
     <>
-      <table className="w-full text-left">
-        <thead className="text-xs uppercase">
-          <tr>
-            <th className="px-6 py-3">Name</th>
-            <th className="px-6 py-3">System</th>
-          </tr>
-        </thead>
-        <tbody>
-          {chars.map(char => (
-            <tr className="border-b" key={char.characterId}>
-              <td>
-                <Link href={`/characters/${char.characterId}`}>{char.characterName}</Link>
-              </td>
-              <td>{char.systemName}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {Object.keys(charsBySystem).map(systemName => {
+        return (
+          <div key={systemName} className="shadow-xl">
+            <p className="text-2xl">{systemName}</p>
+            <div className="flex justify-around border border-gray-400 p-3">
+              {charsBySystem[systemName].map((char: LoadedCharacter) => (
+                <Link key={char.characterId}
+                  className="bg-slate-800 flex grow drop-shadow-lg shadow-2xl p-2 hover:text-gray-400 justify-center m-2"
+                  href={`/characters/${char.characterId}`}>
+                    {char.characterName}
+                </Link>
+              ))}
+
+              <Link className="bg-slate-800 flex grow drop-shadow-lg shadow-2xl p-2 hover:text-gray-400 justify-center m-2"
+                  href={`/${systemName}/new`}>New Character</Link>
+            </div>
+          </div>
+        )
+      })}
     </>
   )
+
   return (
     <>
-    <h1>Welcome, Traveller! All your characters are here.</h1>
-    {content}
+      <h1 className="text-2xl">Welcome, Traveller! All your characters are here.</h1>
+
+      <div className="inline-flex items-center justify-center w-full">
+        <hr className="w-64 h-1 my-8 bg-gray-200 border-0 rounded dark:bg-gray-700" />
+        <div className="absolute px-4 -translate-x-1/2 bg-white left-1/2 dark:bg-slate-600">
+            <GiCharacter />
+        </div>
+      </div>
+
+      {contentBySystem}
     </>
   )
 }
