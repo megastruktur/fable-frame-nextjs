@@ -137,16 +137,16 @@ export default async function Character({ character }: Props) {
 
   // Main Character Page HTML
   return (
-    <main className="flex flex-row justify-around">
+    <main className="flex flex-wrap justify-around">
       
-      {/* Skills */}
-      <section className="flex border-slate-700 border-2 p-2 shadow-2xl rounded">
-        <CharacterSkillsSection />
-      </section>
-
       {/* Character details */}
       <section className="flex">
         <CharacterDetailsSection />
+      </section>
+
+      {/* Skills */}
+      <section className="flex border-slate-700 border-2 p-2 shadow-2xl rounded">
+        <CharacterSkillsSection />
       </section>
 
       {/* I feel */}
