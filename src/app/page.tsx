@@ -23,7 +23,7 @@ export default function Home() {
 
       <div className="flex flex-col items-center mt-10">
         <h3 className="flex items-center text-2xl font-bold mr-5 text-red-400"><Siren />The problem<Siren /></h3>
-        <p>I am a gamemaster for 10+ years. During all that time I've collected tons of paper sheets with characters on them. I've tried various software (OneDrive, DnD Beyond, Orcpub, FoundryVTT, etc.) to handle character storage for me and found out that it's almost impossible to use them on a *Mobile Device*.</p>
+        <p>I am a gamemaster for 10+ years. During all that time I&lsquo;ve collected tons of paper sheets with characters on them. I&lsquo;ve tried various software (OneDrive, DnD Beyond, Orcpub, FoundryVTT, etc.) to handle character storage for me and found out that it&lsquo;s almost impossible to use them on a *Mobile Device*.</p>
       </div>
 
       <div className="flex flex-col items-center mt-10">
