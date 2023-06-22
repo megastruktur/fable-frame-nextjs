@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { LoadedCharacter, loadAllCharactersWithSystemAndName } from "@/lib/character"
+import { loadAllCharactersWithSystemAndName } from "@/lib/character"
 import { GiCharacter } from "react-icons/gi";
 
 import { listLoadedSystems } from "@/lib/system"
@@ -43,7 +43,7 @@ export default async function CharactersPage() {
             <div className="flex justify-around border border-gray-400 p-3">
               {charsBySystem[systemName].map((char: LoadedCharacter) => (
                 <Link key={char.characterId}
-                  className="bg-slate-800 flex grow drop-shadow-lg shadow-2xl p-2 hover:text-gray-400 justify-center m-2"
+                  className="bg-slate-600 flex grow drop-shadow-lg shadow-2xl p-2 hover:text-gray-400 justify-center m-2 rounded-lg font-bold"
                   href={`/characters/${char.characterId}`}>
                     {char.characterName}
                 </Link>
@@ -62,7 +62,7 @@ export default async function CharactersPage() {
 
       <div className="inline-flex items-center justify-center w-full">
         <hr className="w-64 h-1 my-8 bg-gray-200 border-0 rounded dark:bg-gray-700" />
-        <div className="absolute px-4 -translate-x-1/2 bg-white left-1/2 dark:bg-slate-600">
+        <div className="absolute px-4 -translate-x-1/2 bg-white left-1/2 dark:bg-slate-800">
             <GiCharacter />
         </div>
       </div>

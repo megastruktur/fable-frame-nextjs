@@ -27,3 +27,15 @@ type TTRPGSystem = {
   compendium: CompendiumSystemData
   character: CharacterSystemData
 }
+
+type LoadedCharacter = {
+  characterId: string,
+  characterName: string,
+  systemName: string,
+}
+
+type Post = {
+  id: string
+  title: string
+  date: string
+}

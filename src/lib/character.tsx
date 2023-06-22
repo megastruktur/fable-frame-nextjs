@@ -104,12 +104,6 @@ export async function getCharacterField(character: Character, fieldName: string)
 //   });
 // }
 
-export type LoadedCharacter = {
-  characterId: string,
-  characterName: string,
-  systemName: string,
-}
-
 /**
  * @todo Add Pagination.
  * @returns 
