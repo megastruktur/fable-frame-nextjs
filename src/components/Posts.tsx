@@ -7,16 +7,17 @@ type Props = {
 
 export default function Posts({ type }: Props) {
 
+  // @todo Add SSG
   const blogs: Post[] = getSortedPostsDataByType(type)
 
   return (
-    <section className="mt-6 mx-auto max-w-2xl">
-      <h2 className="text-4xl font-bold text-white/90 capitalize">{type}</h2>
-      <ul className="w-full">
+    <section className="flex flex-col w-full items-center">
+      <h1 className="text-4xl flex font-bold text-white/90 capitalize mb-10">{type}</h1>
+      <div className="flex flex-col">
         {blogs.map(({id, title, date}) => (
           <PostPreview key={id} id={id} title={title} date={date} type={type}/>
         ))}
-      </ul>
+      </div>
 
     </section>
   )

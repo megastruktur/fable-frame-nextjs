@@ -56,7 +56,7 @@ export default async function PostPage({ params: { postType, postId } }: Params)
   const formattedDate = getFormattedDate(date)
 
   return (
-    <section>
+    <section className="prose dark:text-white dark:prose-invert">
       <h1 className="mb-0">{title}</h1>
       <p className="italic text-xs my-1">{formattedDate}</p>
       <article>

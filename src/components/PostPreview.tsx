@@ -10,9 +10,11 @@ type Props = {
 
 export default function PostPreview({id, title, date, type} : Props) {
   return (
-    <div>
-      <h2 className="text-xl"><Link className="text-white" href={`/posts/${type}/${id}`}>{title}</Link></h2>
-      <p className="italic text-xs my-1">{getFormattedDate(date)}</p>
+    <div className="flex flex-row items-center">
+      <p className="flex italic text-sm mr-3">{getFormattedDate(date)}</p>
+      <h2 className="flex text-xl">
+        <Link className="text-white" href={`/posts/${type}/${id}`}>{title}</Link>
+      </h2>
     </div>
   )
 }

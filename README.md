@@ -20,8 +20,8 @@ A WIP project to create an application to store Character Sheets from different 
 - To access Pocketbase DB from local start it with `./pocketbase serve --http="MACHINELOCALIP:8090"` and then change the db.tsx to reflect the IP change.
 
 # Current Progress
-![](images/current-functionality.gif)
+![](public/images/current-functionality.gif)
 
-![](images/list-characters.png)
+![](public/images/list-characters.png)
 
-![](images/delete_character.png)
+![](public/images/delete_character.png)
