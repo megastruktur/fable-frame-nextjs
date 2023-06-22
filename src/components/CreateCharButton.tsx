@@ -19,6 +19,6 @@ export default function CreateCharButton({ systemName }: Props) {
   }
 
   return (
-    <Link className="bg-green-700 flex min-h-2 min-w-2 drop-shadow-lg shadow-2xl p-2 hover:text-gray-400 justify-center m-2 rounded-lg font-bold" onClick={clickHandler} href="/">New character</Link>
+    <Link className="bg-green-700 grow flex min-h-2 min-w-2 drop-shadow-lg shadow-2xl p-2 hover:text-gray-400 justify-center m-2 rounded-lg font-bold" onClick={clickHandler} href="/">New character</Link>
   )
 }
